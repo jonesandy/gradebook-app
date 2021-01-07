@@ -1,20 +1,18 @@
 ﻿using GradeBook.Models;
-using System;
 using System.Collections.Generic;
 
 namespace GradeBook
 {
     public class Book
     {
+        private StatisticsBuilder _statsBuilder;
         private List<double> grades = new List<double>();
         private string name;
-        private double total = 0.0;
-        private double highGrade = double.MinValue;
-        private double lowGrade = double.MaxValue;
 
         public Book(string name)
         {
             this.name = name;
+            _statsBuilder = new StatisticsBuilder();
         }
 
         public List<double> GetGrades()
@@ -32,21 +30,9 @@ namespace GradeBook
             return grades;
         }
 
-        public Statistics ComputeStatistics()
+        public Statistics GenerateStatistics()
         {
-            foreach (var score in grades)
-            {
-                highGrade = Math.Max(score, highGrade);
-                lowGrade = Math.Min(score, lowGrade);
-                total += score;
-            }
-
-            return new Statistics
-            {
-                AverageGrade = total / grades.Count,
-                HighGrade = highGrade,
-                LowGrade = lowGrade
-            };
+            return _statsBuilder.ComputeStatistics(grades);
         }
     }
 }

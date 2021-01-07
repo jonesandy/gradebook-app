@@ -10,7 +10,7 @@
             book.AddGrade(86.3);
             book.AddGrade(92.1);
 
-            var stats = book.ComputeStatistics();
+            var stats = book.GenerateStatistics();
 
             DisplayFormatter.PrintStatistics(stats);
         }

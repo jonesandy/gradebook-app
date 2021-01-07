@@ -5,5 +5,6 @@
         public double AverageGrade { get; set; }
         public double HighGrade { get; set; }
         public double LowGrade { get; set; }
+        public char Rating { get; set; }
     }
 }
