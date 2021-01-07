@@ -1,15 +1,24 @@
 using AutoFixture;
+using AutoFixture.Xunit2;
+using System.ComponentModel.DataAnnotations;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace GradeBook.Tests
 {
     public class BookTests
     {
-        [Fact]
-        public void Grade_should_be_added_to_book()
+        private readonly ITestOutputHelper _output;
+
+        public BookTests(ITestOutputHelper output)
+        {
+            _output = output;
+        }
+
+        [Theory, AutoData]
+        public void Grade_should_be_added_to_book([Range(0, 100)] double grade)
         {
             var fixture = new Fixture();
-            var grade = fixture.Create<double>();
             var sut = new Book(fixture.Create<string>());
 
             var result = sut.AddGrade(grade);
@@ -18,15 +27,26 @@ namespace GradeBook.Tests
         }
 
         [Fact]
-        public void All_grades_should_be_returned()
+        public void Grade_should_not_be_added()
         {
             var fixture = new Fixture();
-            var grade1 = fixture.Create<double>();
-            var grade2 = fixture.Create<double>();
+            var grade = 105;
             var sut = new Book(fixture.Create<string>());
-            
-            sut.AddGrade(grade1);
-            sut.AddGrade(grade2);
+
+            sut.AddGrade(grade);
+            var result = sut.AddGrade(grade);
+
+            Assert.DoesNotContain(grade, result);
+        }
+
+        [Theory, AutoData]
+        public void All_grades_should_be_returned([Range(0, 100)]double grade)
+        {
+            var fixture = new Fixture();
+            var sut = new Book(fixture.Create<string>());
+
+            sut.AddGrade(grade);
+            sut.AddGrade(grade);
             var result = sut.GetGrades();
 
             Assert.Equal(2, result.Count);

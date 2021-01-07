@@ -24,7 +24,10 @@ namespace GradeBook
 
         public List<double> AddGrade(double grade)
         {
-            grades.Add(grade);
+            if(grade <= 100 && grade >=0)
+            {
+                grades.Add(grade);
+            }
 
             return grades;
         }
