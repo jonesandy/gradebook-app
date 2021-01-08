@@ -1,5 +1,6 @@
 ﻿using GradeBook.Models;
 using System.Collections.Generic;
+using System;
 
 namespace GradeBook
 {
@@ -25,6 +26,10 @@ namespace GradeBook
             if(grade <= 100 && grade >=0)
             {
                 grades.Add(grade);
+            }
+            else
+            {
+                throw new ArgumentException($"Invalid {nameof(grade)}");
             }
 
             return grades;
