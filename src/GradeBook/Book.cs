@@ -8,11 +8,14 @@ namespace GradeBook
     {
         private StatisticsBuilder _statsBuilder;
         private List<double> grades = new List<double>();
-        private string name;
+        public string Name { get; set; }
+        public readonly string Category;
+        public const string USAGE = "Grades";
 
-        public Book(string name)
+        public Book(string name) 
         {
-            this.name = name;
+            Category = "School Book";
+            Name = name;
             _statsBuilder = new StatisticsBuilder();
         }
 

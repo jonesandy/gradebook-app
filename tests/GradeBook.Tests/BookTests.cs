@@ -21,14 +21,12 @@ namespace GradeBook.Tests
         [Theory]
         [InlineData(105)]
         [InlineData(-1)]
-        public void Grade_should_not_be_added(double grade)
+        public void Grade_should_not_be_added_and_exception_thrown(double grade)
         {
             var fixture = new Fixture();
             var sut = new Book(fixture.Create<string>());
 
-            var result = sut.AddGrade(grade);
-
-            Assert.DoesNotContain(grade, result);
+            Assert.Throws<System.ArgumentException>(() => sut.AddGrade(grade));
         }
 
         [Theory, AutoData]
