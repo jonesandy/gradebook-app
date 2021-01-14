@@ -2,7 +2,7 @@
 
 namespace GradeBook
 {
-    class ConsoleWriteLine
+    public class ConsoleWriteLine
     {
         public static void PrintWhenGradeAdded(object sender, EventArgs args)
         {

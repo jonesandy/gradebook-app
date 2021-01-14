@@ -11,7 +11,7 @@ namespace GradeBook.Tests
         public void Grade_should_be_added_to_book([Range(0, 100)] double grade)
         {
             var fixture = new Fixture();
-            var sut = new Book(fixture.Create<string>());
+            var sut = new Book(fixture.Create<string>(), ConsoleWriteLine.PrintWhenGradeAdded);
 
             var result = sut.AddGrade(grade);
 
@@ -24,7 +24,7 @@ namespace GradeBook.Tests
         public void Grade_should_not_be_added_and_exception_thrown(double grade)
         {
             var fixture = new Fixture();
-            var sut = new Book(fixture.Create<string>());
+            var sut = new Book(fixture.Create<string>(), ConsoleWriteLine.PrintWhenGradeAdded);
 
             Assert.Throws<System.ArgumentException>(() => sut.AddGrade(grade));
         }
@@ -33,7 +33,7 @@ namespace GradeBook.Tests
         public void All_grades_should_be_returned([Range(0, 100)]double grade)
         {
             var fixture = new Fixture();
-            var sut = new Book(fixture.Create<string>());
+            var sut = new Book(fixture.Create<string>(), ConsoleWriteLine.PrintWhenGradeAdded);
 
             sut.AddGrade(grade);
             sut.AddGrade(grade);

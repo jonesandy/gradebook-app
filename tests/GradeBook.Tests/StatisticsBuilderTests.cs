@@ -25,7 +25,7 @@ namespace GradeBook.Tests
             var fixture = new Fixture();
             var grade1 = 10;
             var grade2 = 2;
-            var sut = new Book(fixture.Create<string>());
+            var sut = new Book(fixture.Create<string>(), ConsoleWriteLine.PrintWhenGradeAdded);
 
             sut.AddGrade(grade1);
             sut.AddGrade(grade2);
