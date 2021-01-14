@@ -2,14 +2,14 @@
 {
     class ConsoleDecorator
     {
-        public static string ReturnStars()
+        public static void ReturnStars()
         {
-            return "**********";
+            System.Console.WriteLine("**********");
         }
 
-        public static string ReturnDashes()
+        public static void ReturnDashes()
         {
-            return "----------";
+            System.Console.WriteLine("----------");
         }
     }
 }

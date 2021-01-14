@@ -4,7 +4,7 @@
     {
         private const string V = "q"; 
         private const string W = "Q";
-        private delegate string DecorateConsole();
+        private delegate void DecorateConsole();
 
         static void Main()
         {
@@ -13,7 +13,7 @@
 
             var name = System.Console.ReadLine();
             var book = new Book(name);
-            DecorateConsole display;
+            DecorateConsole display = ConsoleDecorator.ReturnDashes;
 
             while (true)
             {
@@ -25,6 +25,7 @@
                     if (x != V && x != W)
                     {
                         book.AddGrade(double.Parse(x));
+                        display();
                     }
                     else
                     {
@@ -42,14 +43,11 @@
             }
 
             var stats = book.GenerateStatistics();
-
             display = ConsoleDecorator.ReturnStars;
-            System.Console.WriteLine(display());
 
+            display();
             DisplayFormatter.PrintStatistics(stats);
-
-            display = ConsoleDecorator.ReturnDashes;
-            System.Console.WriteLine(display());
+            display();
         }
     }
 }
