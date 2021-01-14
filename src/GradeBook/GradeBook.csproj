@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\GradeBook.Types\GradeBook.Types.csproj" />
     <ProjectReference Include="..\GradeBook.Models\GradeBook.Models.csproj" />
+    <ProjectReference Include="..\GradeBook.Types\GradeBook.Types.csproj" />
   </ItemGroup>
 
 </Project>
