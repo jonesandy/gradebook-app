@@ -1,6 +1,7 @@
 ﻿using GradeBook.Models;
 using System.Collections.Generic;
 using System;
+using GradeBook.Types;
 
 namespace GradeBook
 {
@@ -8,14 +9,20 @@ namespace GradeBook
     {
         private StatisticsBuilder _statsBuilder;
         private List<double> grades = new List<double>();
-        public string Name { get; set; }
-        public readonly string Category;
-        public const string USAGE = "Grades";
 
-        public Book(string name) 
+        public const string USAGE = "Grades";
+        public event GradeAddedDelegate GradeAdded;
+        public readonly string Category;
+        public string Name { 
+            get;
+            private set;
+        }
+
+        public Book(string name, GradeAddedDelegate assignGradeAdded) 
         {
-            Category = "School Book";
             Name = name;
+            GradeAdded = assignGradeAdded;
+            Category = "School Book";
             _statsBuilder = new StatisticsBuilder();
         }
 
@@ -29,6 +36,7 @@ namespace GradeBook
             if(grade <= 100 && grade >=0)
             {
                 grades.Add(grade);
+                GradeAdded?.Invoke(Name, new EventArgs());
             }
             else
             {

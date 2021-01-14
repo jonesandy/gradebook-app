@@ -1,53 +1,47 @@
-﻿namespace GradeBook
+﻿using System;
+
+namespace GradeBook
 {
     class Program
     {
-        private const string V = "q"; 
-        private const string W = "Q";
-        private delegate void DecorateConsole();
-
         static void Main()
         {
-            System.Console.WriteLine("Welcome to the GradeBook App.");
-            System.Console.WriteLine("Please name your book.");
+            Console.WriteLine("Welcome to the GradeBook App.");
+            Console.WriteLine("Please name your book.");
 
-            var name = System.Console.ReadLine();
-            var book = new Book(name);
-            DecorateConsole display = ConsoleDecorator.ReturnDashes;
+            var name = Console.ReadLine();
+            var book = new Book(name, ConsoleWriteLine.PrintWhenGradeAdded);
 
             while (true)
             {
-                System.Console.WriteLine("Please add a grade to your book, or 'q' to quit.");
-                var x = System.Console.ReadLine();
+                Console.WriteLine("Please add a grade to your book, or 'q' to quit.");
+                var x = Console.ReadLine();
 
                 try
                 {
-                    if (x != V && x != W)
+                    if (x != "q" && x != "Q")
                     {
                         book.AddGrade(double.Parse(x));
-                        display();
+                        Console.WriteLine("----------");
                     }
                     else
                     {
                         break;
                     }
                 }
-                catch(System.ArgumentException e)
+                catch(ArgumentException e)
                 {
-                    System.Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
                 }
-                catch(System.FormatException e)
+                catch(FormatException e)
                 {
-                    System.Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
                 }
             }
 
             var stats = book.GenerateStatistics();
-            display = ConsoleDecorator.ReturnStars;
 
-            display();
             DisplayFormatter.PrintStatistics(stats);
-            display();
         }
     }
 }
