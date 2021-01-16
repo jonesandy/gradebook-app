@@ -50,5 +50,10 @@ namespace GradeBook
         {
             return _statsBuilder.ComputeStatistics(grades);
         }
+
+        public void DeleteGrades()
+        {
+            grades.Clear();
+        }
     }
 }

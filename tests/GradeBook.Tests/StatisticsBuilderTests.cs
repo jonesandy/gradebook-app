@@ -3,8 +3,10 @@ using Xunit;
 
 namespace GradeBook.Tests
 {
+    [Trait("SUT", "Statistic Builder")]
     public class StatisticsBuilderTests
     {
+        [Trait("TypeOfGrade", "Letter")]
         [Theory]
         [InlineData('A', 90.0)]
         [InlineData('B', 80.0)]
