@@ -1,4 +1,5 @@
 ﻿using AutoFixture;
+using GradeBook.Tests.TestData;
 using Xunit;
 
 namespace GradeBook.Tests
@@ -8,10 +9,7 @@ namespace GradeBook.Tests
     {
         [Trait("TypeOfGrade", "Letter")]
         [Theory]
-        [InlineData('A', 90.0)]
-        [InlineData('B', 80.0)]
-        [InlineData('C', 70.0)]
-        [InlineData('F', 69.9)]
+        [MemberData(nameof(TestGradesData.AverageGradeLetterMapping), MemberType = typeof(TestGradesData))]
         public void Letter_rating_should_be_computed_and_returned(char rating, double grade)
         {
             var sut = new StatisticsBuilder();
@@ -21,22 +19,22 @@ namespace GradeBook.Tests
             Assert.Equal(rating, result);
         }
 
-        [Fact]
-        public void Statistics_should_be_computed_and_returned()
+        [Theory]
+        [MemberData(nameof(TestGradesData.ValidGrades), MemberType = typeof(TestGradesData))]
+        public void Statistics_should_be_computed_and_returned(int grade1, int grade2, int grade3, int average, char letterRating)
         {
             var fixture = new Fixture();
-            var grade1 = 10;
-            var grade2 = 2;
             var sut = new Book(fixture.Create<string>(), ConsoleWriteLine.PrintWhenGradeAdded);
 
             sut.AddGrade(grade1);
             sut.AddGrade(grade2);
+            sut.AddGrade(grade3);
             var result = sut.GenerateStatistics();
 
-            Assert.Equal(grade1, result.HighGrade);
-            Assert.Equal(grade2, result.LowGrade);
-            Assert.Equal(6, result.AverageGrade);
-            Assert.Equal('F', result.Rating);
+            Assert.Equal(grade3, result.HighGrade);
+            Assert.Equal(grade1, result.LowGrade);
+            Assert.Equal(average, result.AverageGrade);
+            Assert.Equal(letterRating, result.Rating);
         }
     }
 }

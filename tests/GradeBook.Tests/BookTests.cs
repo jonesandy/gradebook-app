@@ -1,4 +1,5 @@
 using AutoFixture.Xunit2;
+using GradeBook.Tests.TestData;
 using System;
 using System.ComponentModel.DataAnnotations;
 using Xunit;
@@ -31,8 +32,7 @@ namespace GradeBook.Tests
 
         [Trait("TypeOfGrade", "Number")]
         [Theory]
-        [InlineData(105)]
-        [InlineData(-1)]
+        [MemberData(nameof(TestGradesData.InvalidGrades), MemberType = typeof(TestGradesData))]
         public void Grade_should_not_be_added_and_exception_thrown(double grade)
         {
             _output.WriteLine($"Using book with Name: {_sut.Book.Name}");

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GradeBook.Tests
+﻿namespace GradeBook.Tests
 {
     public class BookFixture 
     {

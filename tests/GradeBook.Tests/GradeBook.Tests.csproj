@@ -25,6 +25,7 @@
     <ProjectReference Include="..\..\src\GradeBook.Models\GradeBook.Models.csproj" />
     <ProjectReference Include="..\..\src\GradeBook.Types\GradeBook.Types.csproj" />
     <ProjectReference Include="..\..\src\GradeBook\GradeBook.csproj" />
+    <ProjectReference Include="..\GradeBook.Tests.TestData\GradeBook.Tests.TestData.csproj" />
   </ItemGroup>
 
 </Project>
