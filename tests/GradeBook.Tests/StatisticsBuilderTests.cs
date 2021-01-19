@@ -24,7 +24,7 @@ namespace GradeBook.Tests
         public void Statistics_should_be_computed_and_returned(int grade1, int grade2, int grade3, int average, char letterRating)
         {
             var fixture = new Fixture();
-            var sut = new Book(fixture.Create<string>(), ConsoleWriteLine.PrintWhenGradeAdded);
+            var sut = new InMemoryBook(fixture.Create<string>(), ConsoleWriteLine.PrintWhenGradeAdded);
 
             sut.AddGrade(grade1);
             sut.AddGrade(grade2);

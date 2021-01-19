@@ -2,11 +2,11 @@
 {
     public class BookFixture 
     {
-        public Book Book { get; private set; }
+        public InMemoryBook Book { get; private set; }
 
         public BookFixture()
         {
-            Book = new Book("TestGradeBook", ConsoleWriteLine.PrintWhenGradeAdded);
+            Book = new InMemoryBook("TestGradeBook", ConsoleWriteLine.PrintWhenGradeAdded);
         }
     }
 }

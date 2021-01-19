@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GradeBook.Types;
+using System;
 
 namespace GradeBook
 {
@@ -10,8 +11,16 @@ namespace GradeBook
             Console.WriteLine("Please name your book.");
 
             var name = Console.ReadLine();
-            var book = new Book(name, ConsoleWriteLine.PrintWhenGradeAdded);
+            var book = new InMemoryBook(name, ConsoleWriteLine.PrintWhenGradeAdded);
+            RecordGrades(book);
 
+            var stats = book.GenerateStatistics();
+
+            DisplayFormatter.PrintStatistics(stats);
+        }
+
+        private static void RecordGrades(IBook book)
+        {
             while (true)
             {
                 Console.WriteLine("Please add a grade to your book, or 'q' to quit.");
@@ -29,19 +38,15 @@ namespace GradeBook
                         break;
                     }
                 }
-                catch(ArgumentException e)
+                catch (ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
                 }
-                catch(FormatException e)
+                catch (FormatException e)
                 {
                     Console.WriteLine(e.Message);
                 }
             }
-
-            var stats = book.GenerateStatistics();
-
-            DisplayFormatter.PrintStatistics(stats);
         }
     }
 }

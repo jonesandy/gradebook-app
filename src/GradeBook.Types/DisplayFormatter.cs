@@ -3,7 +3,7 @@ using System;
 
 namespace GradeBook
 {
-    static class DisplayFormatter
+    public static class DisplayFormatter
     {
         public static void PrintStatistics(Statistics stats)
         {

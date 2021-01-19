@@ -5,24 +5,15 @@ using GradeBook.Types;
 
 namespace GradeBook
 {
-    public class Book
+    public class InMemoryBook : Book
     {
         private StatisticsBuilder _statsBuilder;
-        private List<double> grades = new List<double>();
-
-        public const string USAGE = "Grades";
+        private readonly List<double> grades = new List<double>();
         public event GradeAddedDelegate GradeAdded;
-        public readonly string Category;
-        public string Name { 
-            get;
-            private set;
-        }
 
-        public Book(string name, GradeAddedDelegate assignGradeAdded) 
+        public InMemoryBook(string name, GradeAddedDelegate assignGradeAdded) : base(name)
         {
-            Name = name;
             GradeAdded = assignGradeAdded;
-            Category = "School Book";
             _statsBuilder = new StatisticsBuilder();
         }
 
@@ -31,7 +22,7 @@ namespace GradeBook
             return grades;
         }
 
-        public List<double> AddGrade(double grade)
+        public override List<double> AddGrade(double grade)
         {
             if(grade <= 100 && grade >=0)
             {
