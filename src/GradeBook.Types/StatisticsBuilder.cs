@@ -9,6 +9,7 @@ namespace GradeBook
         public Statistics ComputeStatistics(List<double> grades)
         {
             double total = 0.0;
+            double average = 0.0;
             double highGrade = double.MinValue;
             double lowGrade = double.MaxValue;
 
@@ -19,14 +20,18 @@ namespace GradeBook
                 total += score;
             }
 
-            double average = total / grades.Count;
+            if(total != 0.0)
+            {
+                average = total / grades.Count;
+            }
+
             char rating = GetLetterRating(average);
 
             return new Statistics
             {
                 AverageGrade = average,
-                HighGrade = highGrade,
-                LowGrade = lowGrade,
+                HighGrade = highGrade == double.MinValue? 0 : highGrade,
+                LowGrade = lowGrade == double.MaxValue? 0 : lowGrade,
                 Rating = rating
             };
         }
